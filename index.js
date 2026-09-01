@@ -1,5 +1,5 @@
 // const Database = require('better-sqlite3')
-import Database from 'better-sqlite3'
+import Database from 'better-sqlite3';
 
 const db = new Database('database.db')
 // this code above is creating a file named 'database.db' if there was none
@@ -10,7 +10,6 @@ console.log('database is connected')
 /*
   ei db console korle vetore ekta Database namer object ache.
 
-  
   db:  Database {
     name: 'database.db',
     open: true,
@@ -18,4 +17,27 @@ console.log('database is connected')
     readonly: false,
     memory: false
   }
+
 */
+
+// creating table:
+db.exec(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    email TEXT,
+    phone number
+  )
+`)
+
+console.log("Users table is ready!");
+
+// inserting user
+const insertUser = db.prepare(`
+  INSERT INTO users (name, email, phone)
+  VALUES (?, ?, ?)
+`);
+
+insertUser.run("Alice", "alice@example.com", '0184567890');
+
+console.log("User inserted!");
