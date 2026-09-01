@@ -38,6 +38,15 @@ const insertUser = db.prepare(`
   VALUES (?, ?, ?)
 `);
 
-insertUser.run("Alice", "alice@example.com", '0184567890');
+// insertUser.run("Alice", "alice@example.com", '0184567890');
+insertUser.run("Tanjim", "mail@gmail.com", "0184567890")
 
-console.log("User inserted!");
+// console.log("User inserted!");
+
+
+// reading 
+const users = db.prepare(`
+  SELECT * FROM users
+`).all();
+
+console.log(users);
