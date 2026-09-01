@@ -39,14 +39,33 @@ const insertUser = db.prepare(`
 `);
 
 // insertUser.run("Alice", "alice@example.com", '0184567890');
-insertUser.run("Tanjim", "mail@gmail.com", "0184567890")
+// insertUser.run("Tanjim", "mail@gmail.com", "0184567890")
 
 // console.log("User inserted!");
 
 
 // reading 
+// const users = db.prepare(`
+//   SELECT * FROM users
+// `).all();
+
+// console.log(users);
+
+update
+const updateUser = db.prepare(`
+  UPDATE users
+  SET email = ?
+  WHERE id = ?
+`);
+
+updateUser.run("tanjim@example.com", 1);
+
+console.log("User updated!");
+
+// conditional search for id == 1
 const users = db.prepare(`
   SELECT * FROM users
+  WHERE id = 1
 `).all();
 
 console.log(users);
