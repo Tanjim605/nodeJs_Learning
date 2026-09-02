@@ -28,7 +28,35 @@ async function createUser(name, email) {
   return result.rows[0];
 }
 
-createUser("Tanjimul", "tanjim@gmail.com");
+async function updateUser(email, id) {
+  const result = await client.query(
+    `
+    UPDATE users
+    SET email = $1
+    WHERE id = $2
+    RETURNING *
+  `,
+    [email, id]
+  );
+}
+
+async function deleteUser(id) {
+  const result = await client.query(
+    `
+    DELETE FROM users
+    WHERE id = $1
+    RETURNING *
+  `,
+    [id]
+  );
+}
+
+// createUser("Tanjimul", "tanjim@gmail.com")
+
+// updateUser("tanjim2@gmail.com", 3)
+
+// this delete is only working if there is a data on id: 2
+// deleteUser(2)
 
 // reading all of the users.
 const result = await client.query("SELECT * FROM users");
